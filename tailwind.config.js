@@ -6,7 +6,7 @@ module.exports = {
     "./getContent.php",
     "src/pages/getCountryInfo.php",
     "src/pages/footer.html",
-    "src/pages/header.html",
+    "src/pages/nav.html",
   ],
   theme: {
     extend: {},
@@ -14,6 +14,6 @@ module.exports = {
   plugins: [
     function ({ addVariant }) {
       addVariant("child", "& > *");
-    }
+    },
   ],
 };
