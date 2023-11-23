@@ -12,7 +12,7 @@
                 </a>
             </li>
             <li>
-                <a href="CATALOG.php">
+                <a href="catalog.php">
                     <span>CATALOG</span>
                 </a>
             </li>
@@ -28,14 +28,14 @@
                 <div class="dropdown">
                     <div class="flex items-center justify-center gap-6">
                         <div class="child:text-black hidden md:block">
-                            <a href="src/pages/login.php" class="border-r border-black pr-1"> Log in</a>
-                            <a href="src/pages/register.php"> Sign up</a>
+                            <a href="login.php" class="border-r border-black pr-1"> Log in</a>
+                            <a href="signup.php"> Sign up</a>
                         </div>
                         <p id="basket-count"
                             class="bg-amber-400 rounded-3xl w-5 h-5 text-center absolute top-2 right-[55px] sm:block sm:right-[55px] md:right-[17px] md:block">
                             0
                         </p>
-                        <img onclick="toggleDropdown()"
+                        <img onclick="toggleCartMenu()"
                             class="dropbtn color-black cursor-pointer w-9  h-9 object-contain sm:block sm:mr-1  "
                             src="src/images/cart.png" alt="" />
                     </div>
@@ -48,7 +48,7 @@
                             <div class="flex justify-around py-2 bg-black z-30">
                                 <button onclick="location.href='checkout.php'"
                                     class="font-bold rounded-[15px] p-2 w-28 flex justify-center bg-[#EFE61E]">Checkout</button>
-                                <button onclick="localStorage.clear(); document.location.reload()"
+                                <button
                                     class="font-bold rounded-[15px] p-2 w-28 flex justify-center bg-[#EFE61E]">Clear</button>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                 </a>
             </div>
             <div class="pt-6 text-2xl text-[#FFC436] font-semibold w-[90%] flex justify-center">
-                <a href="CATALOG.php">
+                <a href="catalog.php">
                     <span>CATALOG</span>
                 </a>
             </div>
