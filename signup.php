@@ -13,7 +13,7 @@ include("src/php/conn.php");
     <?php include("src/pages/head.html")?>
     <title>Sign up | O'PEP</title>
 </head>
-<body>
+<body class="flex flex-col justify-between h-[100vh]">
     <?php include("src/pages/nav.html")?>
     <?php include("src/pages/login.html")?>
     <?php include("src/pages/footer.html")?>
