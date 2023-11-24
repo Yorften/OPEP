@@ -15,11 +15,14 @@ include("src/php/conn.php");
     <title>Home | O'PEP</title>
 </head>
 
-<body class="flex flex-col justify-between h-[100vh]">
+<body>
+
     <?php include("src/pages/nav.html"); ?>
+
+    <?php include("src/pages/footer.html"); ?>
+    
     <script src="src/js/burger.js"></script>
     <script src="src/js/cart.js"></script>
-    <?php include("src/pages/footer.html"); ?>
 </body>
 
 </html>
