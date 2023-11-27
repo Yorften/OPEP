@@ -3,11 +3,24 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include("src/php/conn.php");
+include("../includes/conn.php");
+
+session_start();
+
+if (isset($_SESSION['client_name'])) {
+    header('location:../../index.php');
+    exit;
+} elseif (isset($_SESSION['admin_name'])) {
+    header('location:dashboard.php');
+    exit;
+} elseif (isset($_SESSION['admin_name'])) {
+    header('location:controlpanel.php');
+    exit;
+}
 
 if (isset($_POST['submit'])) {
 
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
+    $userName = mysqli_real_escape_string($conn, $_POST['username']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $role = 4;
@@ -25,14 +38,14 @@ if (isset($_POST['submit'])) {
         $stmt = $conn->prepare($insert);
 
         if ($stmt) {
-            $stmt->bind_param("sssi", $username, $email, $password, $role);
+            $stmt->bind_param("sssi", $userName, $email, $password, $role);
             $stmt->execute();
             $userId = $stmt->insert_id;
             $stmt->close();
         } else {
             echo "Error preparing statement: " . $conn->error;
         }
-        header('location:role.php?id='. $userId);
+        header('location:role.php?id=' . $userId);
         exit;
     }
 }
@@ -43,16 +56,16 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 
 <head>
-    <?php include("src/pages/head.html") ?>
+    <?php include("../includes/head.html") ?>
     <title>Sign up | O'PEP</title>
 </head>
 
 <body>
 
-    <?php include("src/pages/nav.html") ?>
+    <?php include("../includes/nav.php") ?>
 
     <div class="flex justify-center my-12">
-        <div class="flex flex-col justify-center w-1/2 bg-white border border-black rounded-xl">
+        <div class="flex flex-col justify-center w-[90%] bg-white border border-black rounded-xl md:w-1/2">
             <form class="w-3/4 mx-auto" method="post">
                 <div class="flex flex-col mt-8">
                     <div class="capitalize mb-5 font-semibold text-xl">
@@ -114,10 +127,10 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 
-    <?php include("src/pages/footer.html") ?>
+    <?php include("../includes/footer.html") ?>
 
-    <script src="src/js/burger.js"></script>
-    <script src="src/js/cart.js"></script>
+    <script src="../js/burger.js"></script>
+    <script src="../js/cart.js"></script>
 </body>
 
 </html>

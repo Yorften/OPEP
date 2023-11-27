@@ -3,7 +3,20 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include("src/php/conn.php");
+include("../includes/conn.php");
+
+session_start();
+
+if (isset($_SESSION['client_name'])) {
+    header('location:../../index.php');
+    exit;
+} elseif (isset($_SESSION['admin_name'])) {
+    header('location:dashboard.php');
+    exit;
+} elseif (isset($_SESSION['admin_name'])) {
+    header('location:controlpanel.php');
+    exit;
+}
 
 if (isset($_POST['submit'])) {
 
@@ -19,25 +32,31 @@ if (isset($_POST['submit'])) {
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $userId = $row["userId"];
+        $userName = $row["userName"];
         $password_db = $row["userPassword"];
         $roleId = $row["roleId"];
         $isVerified = $row["isVerified"];
         if (password_verify($password, $password_db)) {
             switch ($roleId) {
                 case 1:
-                    header('location:landing.php');
-                    exit;
+                    if ($isVerified == 1) {
+                        $_SESSION['client_name'] = $userName;
+                        header('location:../../index.php');
+                        exit;
+                    } else $msg[] = "Your account is locked, please contact support";
                     break;
                 case 2:
                     if ($isVerified == 1) {
+                        $_SESSION['admin_name'] = $userName;
                         header('location:dashboard.php');
                         exit;
-                    }else
-                    $msg[] = "Account locked or disactivated, please contact your supervisor";
+                    } else
+                        $msg[] = "Account locked or disactivated, please contact your supervisor";
                     break;
-                    
+
                 case 3:
-                    header('location:dashboard.php');
+                    $_SESSION['administrator_name'] = $userName;
+                    header('location:controlpanel.php');
                     exit;
                     break;
                 case 4:
@@ -57,16 +76,16 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 
 <head>
-    <?php include("src/pages/head.html") ?>
+    <?php include("../includes/head.html") ?>
     <title>Log in | O'PEP</title>
 </head>
 
 <body>
 
-    <?php include("src/pages/nav.html") ?>
+    <?php include("../includes/nav.php") ?>
 
     <div class="flex justify-center my-12">
-        <div class="flex flex-col justify-center w-1/2 bg-white border border-black rounded-xl">
+        <div class="flex flex-col justify-center w-[85%] bg-white border border-black rounded-xl md:w-1/2">
             <form class="w-3/4 mx-auto" method="post">
                 <div class="flex flex-col mt-8">
                     <div class="capitalize mb-5 font-semibold text-xl">
@@ -111,10 +130,10 @@ if (isset($_POST['submit'])) {
 
         </div>
 
-    </div> <?php include("src/pages/footer.html") ?>
+    </div> <?php include("../includes/footer.html") ?>
 
-    <script src="src/js/burger.js"></script>
-    <script src="src/js/cart.js"></script>
+    <script src="../js/burger.js"></script>
+    <script src="../js/cart.js"></script>
 </body>
 
 </html>

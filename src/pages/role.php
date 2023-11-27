@@ -3,11 +3,14 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-include("src/php/conn.php");
+include("../includes/conn.php");
+
+session_start();
 
 if (isset($_POST['submit'])) {
 
-    $id = $_GET['id'];
+    $userId = $_GET['id'];
+    $totalPrice = 0;
     $choice = mysqli_real_escape_string($conn, $_POST['user-choice']);
 
     if ($choice === "client") {
@@ -16,13 +19,33 @@ if (isset($_POST['submit'])) {
         $stmt = $conn->prepare($update);
         if ($stmt) {
             $role = 1;
-            $stmt->bind_param("iii", $role, $role, $id);
+            $stmt->bind_param("iii", $role, $role, $userId);
             $stmt->execute();
             $stmt->close();
         } else {
             echo "Error preparing statement: " . $conn->error;
         }
-        header('location:landing.php');
+        $insert = "INSERT INTO carts (totalPrice, userId) VALUES (?, ?)";
+        $stmt = $conn->prepare($insert);
+
+        if ($stmt) {
+            $stmt->bind_param("ii", $totalPrice, $userId);
+            $stmt->execute();
+            $userId = $stmt->insert_id;
+            $stmt->close();
+        } else {
+            echo "Error preparing statement: " . $conn->error;
+        }
+        $select = "SELECT * FROM users WHERE userId = ?";
+        $stmt = $conn->prepare($select);
+        $stmt->bind_param("i", $_GET['id']);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+        $row = mysqli_fetch_assoc($result);
+        $userName = $row['userName'];
+        $_SESSION['client_name'] = $userName;
+        header('location:../../index.php');
         exit;
     } else {
 
@@ -47,13 +70,13 @@ if (isset($_POST['submit'])) {
 <html lang="en">
 
 <head>
-    <?php include("src/pages/head.html"); ?>
+    <?php include("../includes/head.html"); ?>
     <title>Sign Up | O'PEP</title>
 </head>
 
 <body>
 
-    <?php include("src/pages/nav.html") ?>
+    <?php include("../includes/nav.php") ?>
 
     <div class="flex justify-center my-12">
         <div class="mx-auto w-1/2 bg-white border border-black rounded-xl">
@@ -100,10 +123,10 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 
-    <?php include("src/pages/footer.html") ?>
+    <?php include("../includes/footer.html") ?>
 
-    <script src="src/js/burger.js"></script>
-    <script src="src/js/cart.js"></script>
+    <script src="../js/burger.js"></script>
+    <script src="../js/cart.js"></script>
 </body>
 
 </html>
