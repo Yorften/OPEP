@@ -40,6 +40,15 @@ if (isset($_POST['submit'])) {
             switch ($roleId) {
                 case 1:
                     if ($isVerified == 1) {
+                        $select = "SELECT * FROM carts WHERE userId = ?";
+                        $stmt = $conn->prepare($select);
+                        $stmt->bind_param("i", $userId);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $row = mysqli_fetch_assoc($result);
+                        $cartId = $row['cartId'];
+
+                        $_SESSION['client_cart'] = $cartId;
                         $_SESSION['client_name'] = $userName;
                         header('location:../../index.php');
                         exit;

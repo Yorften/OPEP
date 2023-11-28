@@ -8,6 +8,39 @@ if (!isset($_SESSION['client_name'])) {
     exit;
 }
 
+if (isset($_POST['addCart'])) {
+    $plantId = $_POST['plantId'];
+    $cartId = $_SESSION['client_cart'];
+
+    $select = "SELECT * FROM plants_carts WHERE plantId = ?";
+    $stmt = $conn->prepare($select);
+    $stmt->bind_param("i", $plantId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $quantity = $row['quantity'];
+        $quantity += 1;
+
+        $update = "UPDATE plants_carts SET quantity = ? WHERE plantId = ?";
+        $stmt = $conn->prepare($update);
+        $stmt->bind_param("ii", $quantity, $plantId);
+        $stmt->execute();
+
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    } else {
+
+        $insert = "INSERT INTO plants_carts (cartId, plantId) VALUES (?,?)";
+        $stmt = $conn->prepare($insert);
+        $stmt->bind_param("ii", $cartId, $plantId);
+        $stmt->execute();
+        $stmt->close();
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -105,7 +138,7 @@ if (!isset($_SESSION['client_name'])) {
                 ?>
                         <div class="flex flex-col justify-center items-center gap-4 w-[80%] mx-auto">
                             <div class="relative object-contain">
-                                <img src="../images/Plants/<?php echo $image ?>" alt="">
+                                <img id="image" src="../images/Plants/<?php echo $image ?>" alt="">
                                 <div id="hover" class="absolute bottom-0 left-0 w-full bg-white transition-all duration-500 transform translate-y-full opacity-0">
                                     <p class="p-4"><?php echo $desc ?></p>
                                 </div>
@@ -113,12 +146,13 @@ if (!isset($_SESSION['client_name'])) {
                             <div class="flex flex-col justify-between w-full items-center md:flex-row">
                                 <div class="flex flex-col child:text-left">
                                     <p><?php echo $name ?></p>
-                                    <p><?php echo $categorie ?></p>
+                                    <p class="font-medium"><?php echo $categorie ?></p>
                                 </div>
-                                <div class="flex flex-col items-center justify-center gap-1">
-                                    <button class="p-2 bg-amber-600 border border-black rounded-lg">Add to cart</button>
+                                <form method="post" class="flex flex-col items-center justify-center gap-1">
+                                    <input type="text" name="plantId" value="<?php echo $id ?>" hidden>
+                                    <button type="submit" name="addCart" class="z-10 p-2 bg-amber-600 border border-black rounded-lg">Add to cart</button>
                                     <p class="font-bold"><?php echo $price ?>DH</p>
-                                </div>
+                                </form>
                             </div>
                         </div>
                 <?php

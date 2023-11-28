@@ -82,69 +82,57 @@
         </div>
     </nav>
     <div id="popup" class="popup w-full md:w-[30%] overflow-y-auto">
-            <!-- Content -->
-            <div class="flex flex-col gap-1">
-                <div class="fixed w-7/12 h-8 bg-[#19911D]">
-                    <div class="flex justify-between h-3 pl-5 pt-2 ">
-                        <div onclick="closePopup()" class="text-2xl font-bold cursor-pointer mr-3">
-                            <img class="h-12 object-contain" src="../images/next button.svg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="p-3 mt-6">
-                    <p class="text-center">Your Items</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                    <h2>Popup Content</h2>
-                    <p>This is a sample popup content. You can add your content here.</p>
-                </div>
-                <div class="fixed w-[30%] h-10 bg-[#19911D] bottom-0 p-1">
-                    <div class="flex justify-between px-8">
-                        <a class="font-semibold p-1 hover:bg-[#175c1a] rounded-md" href="src/pages/checkout.php">Checkout</a>
-                        <a class="font-semibold p-1 hover:bg-[#175c1a] rounded-md" href="../pages/emptycart.php">Empty cart</a>
+        <!-- Content -->
+        <div class="flex flex-col gap-1">
+            <div class="fixed w-7/12 h-8 bg-[#19911D]">
+                <div class="flex justify-between h-3 pl-5 pt-2 ">
+                    <div onclick="closePopup()" class="text-2xl font-bold cursor-pointer mr-3">
+                        <img class="h-12 object-contain" src="../images/next button.svg" alt="">
                     </div>
                 </div>
             </div>
-            <button onclick="closePopup()" class="close-btn">Close</button>
+            <div class="p-3 mt-6">
+                <?php
+                $cartId = $_SESSION['client_cart'];
+                $select = "SELECT * FROM plants_carts JOIN plants ON plants_carts.plantId = plants.plantId WHERE cartId = ?";
+                $stmt = $conn->prepare($select);
+                $stmt->bind_param("i", $cartId);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                if (mysqli_num_rows($result) > 0) {
+                ?>
+                    <p class="text-center text-lg font-medium">Your Items</p>
+                    <?php
+                    while ($row=mysqli_fetch_assoc($result)) {
+                        $plantName = $row['plantName'];
+                        $plantImage = $row['plantImage'];
+                        $plantPrice = $row['plantPrice'];
+                        $quantity = $row['quantity'];
+                    ?>
+                        <div>
+
+                        </div>
+                    <?php 
+                    }
+                } else {
+                    ?>
+                    <div>
+                        No items in cart
+                    </div>
+                <?php
+                }
+
+                ?>
+
+            </div>
+            <div class="fixed w-[30%] h-10 bg-[#19911D] bottom-0 p-1">
+                <div class="flex justify-between px-8">
+                    <a class="font-semibold p-1 hover:bg-[#175c1a] rounded-md" href="../pages/checkout.php">Checkout</a>
+                    <a class="font-semibold p-1 hover:bg-[#175c1a] rounded-md" href="../pages/emptycart.php">Empty cart</a>
+                </div>
+            </div>
         </div>
+    </div>
     <div id="displaymenu" class="flex flex-col border-2 border-t-0 border-amber-600 items-center justify-center burger-content w-full py-6 hidden md:hidden">
         <div class="flex flex-col items-center divide-y-2 gap-6 w-full divide-amber-600">
             <?php if (!isset($_SESSION['client_name']) && !isset($_SESSION['admin_name']) && !isset($_SESSION['administrator_name'])) : ?>

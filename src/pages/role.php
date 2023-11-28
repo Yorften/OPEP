@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
         if ($stmt) {
             $stmt->bind_param("ii", $totalPrice, $userId);
             $stmt->execute();
-            $userId = $stmt->insert_id;
+            $cartId = $stmt->insert_id;
             $stmt->close();
         } else {
             echo "Error preparing statement: " . $conn->error;
@@ -44,6 +44,7 @@ if (isset($_POST['submit'])) {
         $stmt->close();
         $row = mysqli_fetch_assoc($result);
         $userName = $row['userName'];
+        $_SESSION['client_cart'] = $cartId;
         $_SESSION['client_name'] = $userName;
         header('location:../../index.php');
         exit;
