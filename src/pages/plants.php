@@ -24,7 +24,7 @@ if (isset($_POST['submit']) && isset($_FILES['plantimg'])) {
             $img_ext = pathinfo($name, PATHINFO_EXTENSION);
             $img_ext_lc = strtolower($img_ext);
 
-            $allowed_ext = array("jpg", "jpeg", "png", "webp");
+            $allowed_ext = array("jpg", "jpeg", "png", "webp", "avif");
 
             if (in_array($img_ext_lc, $allowed_ext)) {
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ext_lc;
@@ -89,7 +89,7 @@ if (isset($_POST['edit']) && isset($_FILES['plantimg'])) {
             $img_ext = pathinfo($name, PATHINFO_EXTENSION);
             $img_ext_lc = strtolower($img_ext);
 
-            $allowed_ext = array("jpg", "jpeg", "png", "webp");
+            $allowed_ext = array("jpg", "jpeg", "png", "webp", "afiv");
 
             if (in_array($img_ext_lc, $allowed_ext)) {
                 $new_img_name = uniqid("IMG-", true) . '.' . $img_ext_lc;
@@ -314,7 +314,7 @@ if (isset($_POST['edit']) && isset($_FILES['plantimg'])) {
                 $rows = $records->num_rows;
 
                 $start = 0;
-                $rows_per_page = 3;
+                $rows_per_page = 5;
                 if (isset($_GET['page'])) {
                     $page = $_GET['page'] - 1;
                     $start = $page * $rows_per_page;
@@ -331,10 +331,10 @@ if (isset($_POST['edit']) && isset($_FILES['plantimg'])) {
             <thead class="border">
                 <tr class="border-2">
                     <th class="w-[20%] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Plant</th>
-                    <th class="w-[10%] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Category</th>
+                    <th class="w-[14%] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Category</th>
                     <th class="w-[40%] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Description</th>
-                    <th class="w-[10%] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Price</th>
-                    <th class="w-[20%] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Action</th>
+                    <th class="w-[8%] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Price</th>
+                    <th class="w-[20    %] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Action</th>
                 </tr>
             </thead>
             <tbody>';
@@ -352,7 +352,7 @@ if (isset($_POST['edit']) && isset($_FILES['plantimg'])) {
                             <td class="px-4 py-2 border-2 border-[#A3A3A3] text-xs md:text-base text-center"><?php echo $desc ?></td>
                             <td class="px-4 py-2 border-2 border-[#A3A3A3] text-xs md:text-base text-center"><?php echo $price ?></td>
                             <td class="px-4 py-2 border-2 border-[#A3A3A3] text-xs md:text-base text-center">
-                                <button onclick="showPlantDetails(<?php echo $id ?>)" class="px-2 rounded-md bg-amber-500"> Modify </button>
+                                <button onclick="showPlantDetails(<?php echo $id ?>)" class="px-2 mb-2 rounded-md bg-amber-500 md:mb-0"> Modify </button>
                                 <a href="deleteplant.php?id=<?php echo $id ?>" class="px-2 rounded-md bg-red-500"> Delete </a>
                             </td>
                         </tr>

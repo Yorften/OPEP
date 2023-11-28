@@ -1,4 +1,3 @@
-<div class="overflow-y-hidden h-12">
     <nav class="bg-[#bdff72] h-12 flex justify-between items-center px-2 md:px-4">
         <div class="block w-1/3 sm:w-1/4 md:w-1/12">
             <a href="../../index.php">
@@ -70,19 +69,7 @@
                         <p id="basket-count" class="bg-amber-400 rounded-3xl w-5 h-5 text-center absolute top-2 right-[55px] sm:block sm:right-[55px] md:right-[17px] md:block">
                             0
                         </p>
-                        <img onclick="toggleCartMenu()" class="dropbtn color-black cursor-pointer w-9  h-9 object-contain sm:block sm:mr-1  " src="../images/cart.png" alt="" />
-                    </div>
-
-                    <div>
-                        <div id="cartDropdown" class="z-10 dropdown-content w-full h-[70vh] border-2 border-black pt-1 overflow-y-auto md:w-96 md:mr-2 mt-5 relative">
-                            <div id="myDropdown" class="pt-2 bg-black z-10">
-
-                            </div>
-                            <div class="flex justify-around py-2 bg-black z-30">
-                                <button onclick="location.href='checkout.php'" class="font-bold rounded-[15px] p-2 w-28 flex justify-center bg-[#EFE61E]">Checkout</button>
-                                <button class="font-bold rounded-[15px] p-2 w-28 flex justify-center bg-[#EFE61E]">Clear</button>
-                            </div>
-                        </div>
+                        <img onclick="openPopup()" class="open-btn dropbtn color-black cursor-pointer w-9  h-9 object-contain sm:block sm:mr-1  " src="../images/cart.png" alt="" />
                     </div>
                 </div>
                 <div id="burgermenu" onclick="toggleBurgerMenu()" class="md:hidden md:mx-2 cursor-pointer mr-3 ml-3">
@@ -90,9 +77,74 @@
                     <span class="block w-6 h-1 my-1 mx-auto bg-white transition-all ease-in-out"></span>
                     <span class="block w-6 h-1 my-1 mx-auto bg-white transition-all ease-in-out"></span>
                 </div>
+
             </div>
         </div>
     </nav>
+    <div id="popup" class="popup w-full md:w-[30%] overflow-y-auto">
+            <!-- Content -->
+            <div class="flex flex-col gap-1">
+                <div class="fixed w-7/12 h-8 bg-[#19911D]">
+                    <div class="flex justify-between h-3 pl-5 pt-2 ">
+                        <div onclick="closePopup()" class="text-2xl font-bold cursor-pointer mr-3">
+                            <img class="h-12 object-contain" src="../images/next button.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="p-3 mt-6">
+                    <p class="text-center">Your Items</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                    <h2>Popup Content</h2>
+                    <p>This is a sample popup content. You can add your content here.</p>
+                </div>
+                <div class="fixed w-[30%] h-10 bg-[#19911D] bottom-0 p-1">
+                    <div class="flex justify-between px-8">
+                        <a class="font-semibold p-1 hover:bg-[#175c1a] rounded-md" href="src/pages/checkout.php">Checkout</a>
+                        <a class="font-semibold p-1 hover:bg-[#175c1a] rounded-md" href="../pages/emptycart.php">Empty cart</a>
+                    </div>
+                </div>
+            </div>
+            <button onclick="closePopup()" class="close-btn">Close</button>
+        </div>
     <div id="displaymenu" class="flex flex-col border-2 border-t-0 border-amber-600 items-center justify-center burger-content w-full py-6 hidden md:hidden">
         <div class="flex flex-col items-center divide-y-2 gap-6 w-full divide-amber-600">
             <?php if (!isset($_SESSION['client_name']) && !isset($_SESSION['admin_name']) && !isset($_SESSION['administrator_name'])) : ?>
@@ -150,4 +202,3 @@
             <?php endif  ?>
         </div>
     </div>
-</div>

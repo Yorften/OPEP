@@ -26,6 +26,7 @@
 
     <script src="../js/burger.js"></script>
     <script src="../js/cart.js"></script>
+    <script src="../js/cartmenu.js"></script>
 </body>
 
 </html>

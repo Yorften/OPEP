@@ -48,10 +48,9 @@ if (!isset($_SESSION['administrator_name'])) {
                 <a class="border-r border-black pr-[2px] mr-1"><?php echo $_SESSION['administrator_name']; ?> </a>
                 <a href="../includes/logout.php">Log out</a>
             </div>
-            <iframe id="contentFrame" name="contentFrame" src="dashboard-index.php" frameborder="0" width="100%" height="100%"></iframe>
+            <iframe id="contentFrame" name="contentFrame" src="plants.php" frameborder="0" width="100%" height="100%"></iframe>
         </div>
     </div>
-
 
     <?php include("../includes/footer_admin.html") ?>
 
