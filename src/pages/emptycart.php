@@ -3,13 +3,14 @@
 include("../includes/conn.php");
 session_start();
 
-if (isset($_SESSION['admin_name']) || isset($_SESSION['administrator_name'])) {
+if (isset($_SESSION['client_name'])) {
 
-    $id = $_GET['id'];
+    $cartId = $_SESSION['client_cart'];
+    $plantId = $_GET['plantId'];
 
-    $delete = "DELETE FROM plants WHERE plantId = ?";
+    $delete = "DELETE FROM plants_carts WHERE cartId = ?";
     $stmt = $conn->prepare($delete);
-    $stmt->bind_param("i", $id);
+    $stmt->bind_param("i", $cartId);
     $stmt->execute();
     $stmt->close();
     header('Location: ' . $_SERVER['HTTP_REFERER']);
