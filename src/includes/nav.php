@@ -1,21 +1,34 @@
  <?php
-    $cartId = $_SESSION['client_cart'];
-    $select = "SELECT * FROM plants_carts JOIN plants ON plants_carts.plantId = plants.plantId WHERE cartId = ?";
-    $stmt = $conn->prepare($select);
-    $stmt->bind_param("i", $cartId);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $count = mysqli_num_rows($result);
-
-    if (isset($_POST['deleteCart'])) {
-        $plantId = $_POST['plantId'];
-        $delete = "DELETE FROM plants_carts WHERE cartId = ? AND plantId = ?";
-        $stmt = $conn->prepare($delete);
-        $stmt->bind_param("ii", $cartId, $plantId);
+    if (isset($_SESSION['client_name'])) {
+        $cartId = $_SESSION['client_cart'];
+        $notselected = 0;
+        $commanded = 0;
+        $selected = 1;
+        $select = "SELECT * FROM plants_carts JOIN plants ON plants_carts.plantId = plants.plantId WHERE cartId = ? AND isSelected = ? AND isCommanded = ?";
+        $stmt = $conn->prepare($select);
+        $stmt->bind_param("iii", $cartId, $notselected, $commanded);
         $stmt->execute();
-        $stmt->close();
-    }
+        $result = $stmt->get_result();
+        $count = mysqli_num_rows($result);
+        $totalPrice = 0;
+        $totalPrice2 = 0;
 
+        $select2 = "SELECT * FROM plants_carts JOIN plants ON plants_carts.plantId = plants.plantId WHERE cartId = ? AND isSelected = ? AND isCommanded = ?";
+        $stmt2 = $conn->prepare($select2);
+        $stmt2->bind_param("iii", $cartId, $selected, $commanded);
+        $stmt2->execute();
+        $result2 = $stmt2->get_result();
+        $count2 = mysqli_num_rows($result2);
+
+        if (isset($_POST['deleteCart'])) {
+            $plantId = $_POST['plantId'];
+            $delete = "DELETE FROM plants_carts WHERE cartId = ? AND plantId = ?";
+            $stmt = $conn->prepare($delete);
+            $stmt->bind_param("ii", $cartId, $plantId);
+            $stmt->execute();
+            $stmt->close();
+        }
+    }
     ?>
 
  <nav class="bg-[#bdff72] h-12 flex justify-between items-center px-2 md:px-4">
@@ -132,9 +145,10 @@
                              <div class="flex flex-col justify-center items-start gap-2">
                                  <p><?php echo $plantName ?></p>
                                  <p>Quantity: <?php echo $quantity ?></p>
-                                 <p>Price: <?php echo $plantPrice ?> DH
-                                 <p class="text-sm">per unit</p>
-                                 </p>
+                                 <div class="flex gap-1 items-center">
+                                     <p>Price: <?php echo $plantPrice ?> DH</p>
+                                     <p class=" text-xs">per unit</p>
+                                 </div>
                              </div>
                              <div class="flex flex-col justify-end h-full gap-2 pr-2 pb-2">
                                  <a href="deleteitem.php?plantId=<?php echo $plantId ?>" class="p-1 bg-red-500 border border-black rounded-lg">Remove</a>
@@ -143,10 +157,11 @@
                      </div>
                  <?php
                     }
+                    mysqli_data_seek($result, 0);
                 } else {
                     ?>
                  <div class="flex flex-col items-center justify-center h-[90vh] text-xl font-medium">
-                     <p>No items in cart</p>
+                     <p>No items in your cart</p>
                  </div>
              <?php
                 }

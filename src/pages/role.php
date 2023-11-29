@@ -10,7 +10,6 @@ session_start();
 if (isset($_POST['submit'])) {
 
     $userId = $_GET['id'];
-    $totalPrice = 0;
     $choice = mysqli_real_escape_string($conn, $_POST['user-choice']);
 
     if ($choice === "client") {
@@ -25,11 +24,11 @@ if (isset($_POST['submit'])) {
         } else {
             echo "Error preparing statement: " . $conn->error;
         }
-        $insert = "INSERT INTO carts (totalPrice, userId) VALUES (?, ?)";
+        $insert = "INSERT INTO carts (userId) VALUES (?)";
         $stmt = $conn->prepare($insert);
 
         if ($stmt) {
-            $stmt->bind_param("ii", $totalPrice, $userId);
+            $stmt->bind_param("i", $userId);
             $stmt->execute();
             $cartId = $stmt->insert_id;
             $stmt->close();

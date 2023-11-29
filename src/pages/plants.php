@@ -157,22 +157,21 @@ if (isset($_POST['edit']) && isset($_FILES['plantimg'])) {
                 <div class="flex flex-col mb-3 w-11/12 md:w-4/6">
                     <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md">
                         <p class="text-xs">Plant name</p>
-                        <input class="placeholder:font-light placeholder:text-xs focus:outline-none" id="plant" type="text" name="plant" placeholder="Name" autocomplete="off">
+                        <input required class="placeholder:font-light placeholder:text-xs focus:outline-none" id="plant" type="text" name="plant" placeholder="Name" autocomplete="off">
                     </div>
                     <div id="plantERR" class="text-red-600 text-xs pl-3"></div>
                 </div>
                 <div class="flex flex-col mb-3 w-11/12 md:w-4/6">
                     <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md">
                         <p class="text-xs">Plant description</p>
-                        <textarea name="plantdesc" id="plantdesc" cols="10" rows="3" class=" resize-none p-1"></textarea>
-
+                        <textarea required name="plantdesc" id="plantdesc" cols="10" rows="3" class=" resize-none p-1"></textarea>
                     </div>
                     <div id="plantdescERR" class="text-red-600 text-xs pl-3"></div>
                 </div>
                 <div class="flex flex-col mb-3 w-11/12 md:w-4/6">
                     <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md">
                         <p class="text-xs">Plant price</p>
-                        <input class="placeholder:font-light placeholder:text-xs focus:outline-none" id="plantprice" type="text" name="plantprice" placeholder="Price" autocomplete="off">
+                        <input required class="placeholder:font-light placeholder:text-xs focus:outline-none" id="plantprice" type="text" name="plantprice" placeholder="Price" autocomplete="off" pattern="[0-9]+" title="Please enter numbers only">
                     </div>
                     <div id="plantpriceERR" class="text-red-600 text-xs pl-3"></div>
                 </div>
@@ -180,14 +179,14 @@ if (isset($_POST['edit']) && isset($_FILES['plantimg'])) {
                     <div class="flex flex-col md:w-1/2">
                         <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md">
                             <p class="text-xs">Plant image</p>
-                            <input class="placeholder:font-light placeholder:text-xs focus:outline-none" id="plantimg" type="file" name="plantimg" autocomplete="off">
+                            <input required class="placeholder:font-light placeholder:text-xs focus:outline-none" id="plantimg" type="file" name="plantimg" autocomplete="off">
                         </div>
                         <div id="plantimgERR" class="text-red-600 text-xs pl-3"></div>
                     </div>
                     <div class="flex flex-col md:w-1/2">
                         <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md md:h-[63.9px]">
                             <p class="text-xs">Plant category</p>
-                            <select class="block leading-5 text-gray-700 bg-white border-transparent rounded-md focus:outline-none focus:ring focus:ring-blue-300 focus:border-blue-300" id=" category" name="category" autocomplete="off">
+                            <select required class="block leading-5 text-gray-700 bg-white border-transparent rounded-md focus:outline-none focus:ring focus:ring-blue-300 focus:border-blue-300" id=" category" name="category" autocomplete="off">
                                 <option value="" hidden disabled selected>Select...</option>
                                 <?php
                                 $select = "SELECT * FROM categories";
@@ -212,7 +211,7 @@ if (isset($_POST['edit']) && isset($_FILES['plantimg'])) {
                 </div>
 
                 <div class="flex justify-end mb-4">
-                    <input type="submit" name="submit" class="cursor-pointer px-8 py-2 bg-[#9fff30] font-semibold rounded-lg border-2 border-[#6da22f]" value="Add plant">
+                    <input required type="submit" name="submit" class="cursor-pointer px-8 py-2 bg-[#9fff30] font-semibold rounded-lg border-2 border-[#6da22f]" value="Add plant">
                 </div>
             </form>
         </div>
@@ -230,14 +229,14 @@ if (isset($_POST['edit']) && isset($_FILES['plantimg'])) {
                 <div class="flex flex-col mb-3 w-11/12 md:w-4/6">
                     <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md">
                         <p class="text-xs">Plant name</p>
-                        <input class="placeholder:font-light placeholder:text-xs focus:outline-none" id="plant2" type="text" name="plant" placeholder="Name" autocomplete="off">
+                        <input required class="placeholder:font-light placeholder:text-xs focus:outline-none" id="plant2" type="text" name="plant" placeholder="Name" autocomplete="off">
                     </div>
                     <div id="plantERR2" class="text-red-600 text-xs pl-3"></div>
                 </div>
                 <div class="flex flex-col mb-3 w-11/12 md:w-4/6">
                     <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md">
                         <p class="text-xs">Plant description</p>
-                        <textarea name="plantdesc" id="plantdesc2" cols="10" rows="3" class=" resize-none p-1"></textarea>
+                        <textarea required name="plantdesc" id="plantdesc2" cols="10" rows="3" class=" resize-none p-1"></textarea>
 
                     </div>
                     <div id="plantdescERR2" class="text-red-600 text-xs pl-3"></div>
@@ -245,7 +244,7 @@ if (isset($_POST['edit']) && isset($_FILES['plantimg'])) {
                 <div class="flex flex-col mb-3 w-11/12 md:w-4/6">
                     <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md">
                         <p class="text-xs">Plant price</p>
-                        <input class="placeholder:font-light placeholder:text-xs focus:outline-none" id="plantprice2" type="text" name="plantprice" placeholder="Price" autocomplete="off">
+                        <input required class="placeholder:font-light placeholder:text-xs focus:outline-none" id="plantprice2" type="text" name="plantprice" placeholder="Price" autocomplete="off" pattern="[0-9]+" title="Please enter numbers only">
                     </div>
                     <div id="plantpriceERR2" class="text-red-600 text-xs pl-3"></div>
                 </div>
@@ -253,14 +252,14 @@ if (isset($_POST['edit']) && isset($_FILES['plantimg'])) {
                     <div class="flex flex-col md:w-1/2">
                         <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md">
                             <p class="text-xs">Plant image</p>
-                            <input class="placeholder:font-light placeholder:text-xs focus:outline-none" id="plantimg2" type="file" name="plantimg" autocomplete="off">
+                            <input required class="placeholder:font-light placeholder:text-xs focus:outline-none" id="plantimg2" type="file" name="plantimg" autocomplete="off">
                         </div>
                         <div id="plantimgERR2" class="text-red-600 text-xs pl-3"></div>
                     </div>
                     <div class="flex flex-col md:w-1/2">
                         <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md md:h-[63.9px]">
                             <p class="text-xs">Plant category</p>
-                            <select class="block leading-5 text-gray-700 bg-white border-transparent rounded-md focus:outline-none focus:ring focus:ring-blue-300 focus:border-blue-300" id=" category2" name="category" autocomplete="off">
+                            <select required class="block leading-5 text-gray-700 bg-white border-transparent rounded-md focus:outline-none focus:ring focus:ring-blue-300 focus:border-blue-300" id=" category2" name="category" autocomplete="off">
                                 <option value="" hidden disabled selected>Select...</option>
                                 <?php
                                 $select = "SELECT * FROM categories";
@@ -286,7 +285,7 @@ if (isset($_POST['edit']) && isset($_FILES['plantimg'])) {
                 </div>
 
                 <div class="flex justify-end mb-4">
-                    <input type="submit" name="edit" class="cursor-pointer px-8 py-2 bg-[#9fff30] font-semibold rounded-lg border-2 border-[#6da22f]" value="Apply changes">
+                    <input required type="submit" name="edit" class="cursor-pointer px-8 py-2 bg-[#9fff30] font-semibold rounded-lg border-2 border-[#6da22f]" value="Apply changes">
                 </div>
             </form>
         </div>

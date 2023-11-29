@@ -52,8 +52,6 @@ if (isset($_SESSION['administrator_name'])) {
 
     <?php include("../includes/footer_admin.html") ?>
 
-    <script src="../js/burger.js"></script>
-    <script src="../js/cart.js"></script>
 </body>
 
 </html>

@@ -7,7 +7,13 @@ if (isset($_SESSION['client_name'])) {
     exit;
 }
 
+$commandId = $_GET['commandId'];
+$cartId = $_GET['cartId'];
+$total = $_GET['total'];
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,51 +24,61 @@ if (isset($_SESSION['client_name'])) {
 
 <body>
     <div class="flex flex-col justify-end items-start h-[100vh]">
-        <div class="flex pl-8">
-            <p class="border-gray-300 rounded-t-lg p-2 pb-1 text-xl">Commands</p>
+        <div class="flex justify-between w-full px-8">
+            <p class="border-gray-300 rounded-t-lg p-2 pb-1 text-xl">Command N°: <?php echo $commandId ?></p>
+            <p>Total price: <?php echo $total ?> DH</p>
         </div>
         <div class="border-2 border-gray-300 rounded-xl h-[90vh] w-full flex">
             <div class="flex flex-col justify-between w-full p-4">
                 <?php
-                $role = 1;
-                $records = $conn->query("SELECT * FROM commands");
+
+                $records = $conn->query("SELECT * FROM plants_carts WHERE cartId = $cartId AND isCommanded = $commandId");
                 $rows = $records->num_rows;
 
                 $start = 0;
-                $rows_per_page = 6;
+                $rows_per_page = 5;
                 if (isset($_GET['page'])) {
                     $page = $_GET['page'] - 1;
                     $start = $page * $rows_per_page;
                 }
-                $select = "SELECT * FROM commands JOIN carts ON commands.cartId = carts.cartId JOIN users ON carts.userId = users.userId LIMIT ?,?";
+
+                $select = "SELECT * FROM plants_carts JOIN plants ON plants_carts.plantId = plants.plantId JOIN categories ON plants.categoryId = categories.categoryId WHERE cartId = ? AND isCommanded = ? LIMIT ?,?";
                 $stmt = $conn->prepare($select);
-                $stmt->bind_param("ii", $start, $rows_per_page);
+                $stmt->bind_param("iiii", $cartId, $commandId, $start, $rows_per_page);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $pages = ceil($rows / $rows_per_page);
-
-
-                if ($rows > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $commandId = $row['commandId'];
-                        $cartId = $row['cartId'];
-                        $commandDate = $row['commandDate'];
-                        $userName = $row['userName'];
-                        $total = $row['total'];
                 ?>
-                        <a href="commanddetails.php?commandId=<?php echo $commandId ?>&cartId=<?php echo $cartId ?>&total=<?php echo $total ?>" class="w-full h-[100px] border-2 rounded-md bg-slate-200 hover:bg-[#bdff72] cursor-pointer">
-                            <div class="w-full h-[90%] mx-auto flex items-center justify-around p-3 child:text-xl child:font-medium">
-                                <p>N°: <?php echo $commandId ?></p>
-                                <p><?php echo $userName ?></p>
-                                <p><?php echo $commandDate ?></p>
-                                <p><?php echo $total ?> DH</p>
-                            </div>
-                        </a>
-                <?php  }
-                } else {
-                    echo 'No client accounts in database';
-                }
-                ?>
+                <table class="table-fixed w-full ">
+                    <thead class="border">
+                        <tr class="border-2">
+                            <th class="w-[30%] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Plant</th>
+                            <th class="w-[20%] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Category</th>
+                            <th class="w-[10%] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Quantity</th>
+                            <th class="w-[20%] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Price /unit</th>
+                            <th class="w-[20%] p-1 md:px-4 md:py-2 border-2 border-[#A3A3A3] text-xs md:text-base">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            $plantName = $row['plantName'];
+                            $categoryName = $row['categoryName'];
+                            $quantity = $row['quantity'];
+                            $plantPrice = $row['plantPrice'];
+                            $totalPrice = $plantPrice * $quantity;
+
+                        ?>
+                            <tr>
+                                <td class="px-4 py-2 border-2 border-[#A3A3A3] text-xs md:text-base text-center"><?php echo $plantName ?></td>
+                                <td class="px-4 py-2 border-2 border-[#A3A3A3] text-xs md:text-base text-center"><?php echo $categoryName ?></td>
+                                <td class="px-4 py-2 border-2 border-[#A3A3A3] text-xs md:text-base text-center"><?php echo $quantity ?></td>
+                                <td class="px-4 py-2 border-2 border-[#A3A3A3] text-xs md:text-base text-center"><?php echo $plantPrice ?></td>
+                                <td class="px-4 py-2 border-2 border-[#A3A3A3] text-xs md:text-base text-center"><?php echo $totalPrice ?></td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
                 <div>
                     <div class="pl-6">
                         <?php
@@ -113,9 +129,6 @@ if (isset($_SESSION['client_name'])) {
             </div>
         </div>
     </div>
-</body>
-
-</html>
 </body>
 
 </html>

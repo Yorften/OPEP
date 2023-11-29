@@ -11,10 +11,10 @@ if (!isset($_SESSION['client_name'])) {
 if (isset($_POST['addCart'])) {
     $plantId = $_POST['plantId'];
     $cartId = $_SESSION['client_cart'];
-
-    $select = "SELECT * FROM plants_carts WHERE plantId = ?";
+    $commanded = 0;
+    $select = "SELECT * FROM plants_carts WHERE plantId = ? AND isCommanded = ? AND cartId = ?";
     $stmt = $conn->prepare($select);
-    $stmt->bind_param("i", $plantId);
+    $stmt->bind_param("iii", $plantId, $commanded, $cartId);
     $stmt->execute();
     $result = $stmt->get_result();
     if (mysqli_num_rows($result) > 0) {
@@ -22,9 +22,9 @@ if (isset($_POST['addCart'])) {
         $quantity = $row['quantity'];
         $quantity += 1;
 
-        $update = "UPDATE plants_carts SET quantity = ? WHERE plantId = ?";
+        $update = "UPDATE plants_carts SET quantity = ? WHERE plantId = ? AND cartId = ?";
         $stmt = $conn->prepare($update);
-        $stmt->bind_param("ii", $quantity, $plantId);
+        $stmt->bind_param("iii", $quantity, $plantId, $cartId);
         $stmt->execute();
 
         header('Location: ' . $_SERVER['HTTP_REFERER']);
@@ -55,7 +55,8 @@ if (isset($_POST['addCart'])) {
     <?php include("../includes/nav.php") ?>
     <div class="w-full text-center my-4">
         <a class="p-2 border-2 filters" href="catalog.php">All</a>
-        <?php $select = "SELECT * FROM categories";
+        <?php
+        $select = "SELECT * FROM categories";
         $stmt = $conn->prepare($select);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -149,7 +150,7 @@ if (isset($_POST['addCart'])) {
                                 </div>
                                 <form method="post" class="flex flex-col items-center justify-center gap-1">
                                     <input type="text" name="plantId" value="<?php echo $id ?>" hidden>
-                                    <button type="submit" name="addCart" class="z-10 p-2 bg-amber-600 border border-black rounded-lg">Add to cart</button>
+                                    <button type="submit" name="addCart" class="z-10 p-2 bg-amber-400 border border-black rounded-lg">Add to cart</button>
                                     <p class="font-bold"><?php echo $price ?>DH</p>
                                 </form>
                             </div>
@@ -261,12 +262,13 @@ if (isset($_POST['addCart'])) {
                 <?php } ?>
             </div>
         </div>
+    </div>
 
-        <?php include("../includes/footer.html") ?>
+    <?php include("../includes/footer.html") ?>
 
-        <script src="../js/burger.js"></script>
-        <script src="../js/filter.js"></script>
-        <script src="../js/cartmenu.js"></script>
+    <script src="../js/burger.js"></script>
+    <script src="../js/filter.js"></script>
+    <script src="../js/cartmenu.js"></script>
 </body>
 
 </html>

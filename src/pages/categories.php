@@ -78,12 +78,12 @@ if (isset($_POST['edit'])) {
                 <div class="flex flex-col mb-3">
                     <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md">
                         <p class="text-xs">Category name</p>
-                        <input class="placeholder:font-light placeholder:text-xs focus:outline-none" id="categoryname" type="text" name="category" placeholder="Name" autocomplete="off">
+                        <input required class="placeholder:font-light placeholder:text-xs focus:outline-none" id="categoryname" type="text" name="category" placeholder="Name" autocomplete="off">
                     </div>
                     <div id="categorynameERR" class="text-red-600 text-xs pl-3"></div>
                 </div>
                 <div class="flex justify-end mb-4">
-                    <input type="submit" name="submit" class="cursor-pointer px-8 py-2 bg-[#9fff30] font-semibold rounded-lg border-2 border-[#6da22f]" value="Add categorie">
+                    <input required type="submit" name="submit" class="cursor-pointer px-8 py-2 bg-[#9fff30] font-semibold rounded-lg border-2 border-[#6da22f]" value="Add categorie">
                 </div>
             </form>
         </div>
@@ -101,12 +101,12 @@ if (isset($_POST['edit'])) {
                 <div class="flex flex-col mb-3">
                     <div class="flex flex-col border-2 border-[#A1A1A1] p-2 rounded-md">
                         <p class="text-xs">Category name</p>
-                        <input class="placeholder:font-light placeholder:text-xs focus:outline-none" id="categoryname2" type="text" name="category" placeholder="Name" autocomplete="off" value="">
+                        <input required class="placeholder:font-light placeholder:text-xs focus:outline-none" id="categoryname2" type="text" name="category" placeholder="Name" autocomplete="off" value="">
                     </div>
                     <div id="categorynameERR2" class="text-red-600 text-xs pl-3"></div>
                 </div>
                 <div class="flex justify-end mb-4">
-                    <input type="submit" name="edit" class="cursor-pointer px-8 py-2 bg-[#9fff30] font-semibold rounded-lg border-2 border-[#6da22f]" value="Apply changes">
+                    <input required type="submit" name="edit" class="cursor-pointer px-8 py-2 bg-[#9fff30] font-semibold rounded-lg border-2 border-[#6da22f]" value="Apply changes">
                 </div>
             </form>
         </div>
