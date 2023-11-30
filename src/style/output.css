@@ -666,6 +666,14 @@ video {
   margin-top: 10vh;
 }
 
+.ml-10 {
+  margin-left: 2.5rem;
+}
+
+.ml-\[10\%\] {
+  margin-left: 10%;
+}
+
 .block {
   display: block;
 }
@@ -777,6 +785,22 @@ video {
 
 .h-\[90\%\] {
   height: 90%;
+}
+
+.h-\[60vh\] {
+  height: 60vh;
+}
+
+.h-\[50vh\] {
+  height: 50vh;
+}
+
+.h-\[55vh\] {
+  height: 55vh;
+}
+
+.h-\[54vh\] {
+  height: 54vh;
 }
 
 .w-1\/2 {
@@ -893,6 +917,22 @@ video {
 
 .w-\[10\%\] {
   width: 10%;
+}
+
+.w-20 {
+  width: 5rem;
+}
+
+.w-\[\] {
+  width: ;
+}
+
+.w-\[60\%\] {
+  width: 60%;
+}
+
+.w-48 {
+  width: 12rem;
 }
 
 .flex-1 {
@@ -1164,6 +1204,16 @@ video {
   border-color: transparent;
 }
 
+.border-amber-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(245 158 11 / var(--tw-border-opacity));
+}
+
+.border-amber-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(251 191 36 / var(--tw-border-opacity));
+}
+
 .bg-\[\#19911D\] {
   --tw-bg-opacity: 1;
   background-color: rgb(25 145 29 / var(--tw-bg-opacity));
@@ -1238,8 +1288,57 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-amber-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 211 77 / var(--tw-bg-opacity));
+}
+
+.bg-\[url\(\'images\/contactimg\.png\'\)\] {
+  background-image: url('images/contactimg.png');
+}
+
+.bg-\[url\(\'src\/images\/contactimg\.png\'\)\] {
+  background-image: url('src/images/contactimg.png');
+}
+
+.bg-\[url\(\'src\/images\/hero\'\)\] {
+  background-image: url('src/images/hero');
+}
+
+.bg-\[url\(\'src\/images\/hero\.webp\'\)\] {
+  background-image: url('src/images/hero.webp');
+}
+
+.bg-\[url\(\'\/src\/images\/hero\.webp\'\)\] {
+  background-image: url('/src/images/hero.webp');
+}
+
+.bg-\[url\(\'\/OPEPsrc\/images\/hero\.webp\'\)\] {
+  background-image: url('/OPEPsrc/images/hero.webp');
+}
+
+.bg-\[url\(\'\/OPEP\/src\/images\/hero\.webp\'\)\] {
+  background-image: url('/OPEP/src/images/hero.webp');
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-no-repeat {
+  background-repeat: no-repeat;
+}
+
 .fill-current {
   fill: currentColor;
+}
+
+.stroke-black {
+  stroke: #000;
+}
+
+.stroke-1 {
+  stroke-width: 1;
 }
 
 .object-contain {
@@ -1365,6 +1464,10 @@ video {
   padding-top: 1.5rem;
 }
 
+.pt-4 {
+  padding-top: 1rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1397,6 +1500,20 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.text-\[42px\] {
+  font-size: 42px;
 }
 
 .font-bold {
@@ -1442,6 +1559,10 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-\[5xl\] {
+  color: 5xl;
 }
 
 .underline {

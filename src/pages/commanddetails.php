@@ -36,7 +36,7 @@ $total = $_GET['total'];
                 $rows = $records->num_rows;
 
                 $start = 0;
-                $rows_per_page = 5;
+                $rows_per_page = 8;
                 if (isset($_GET['page'])) {
                     $page = $_GET['page'] - 1;
                     $start = $page * $rows_per_page;
@@ -95,7 +95,7 @@ $total = $_GET['total'];
                         <a href="?page=1">First</a>
                         <?php if (isset($_GET['page']) && $_GET['page'] > 1) { ?>
 
-                            <a href="?page=<?php echo $_GET['page'] - 1 ?>">Previous</a>
+                            <a href="?page=<?php echo $_GET['page'] - 1 ?>&commandId=<?php echo $commandId ?>&cartId=<?php echo $cartId ?>&total=<?php echo $total ?>">Previous</a>
 
                         <?php } else { ?>
                             <a class="cursor-pointer">Previous</a>
@@ -104,7 +104,7 @@ $total = $_GET['total'];
                         <?php
                         for ($i = 1; $i <= $pages; $i++) {
                         ?>
-                            <a href="?page=<?php echo $i ?>" class=""><?php echo $i ?></a>
+                            <a href="?page=<?php echo $i ?>&commandId=<?php echo $commandId ?>&cartId=<?php echo $cartId ?>&total=<?php echo $total ?>" class=""><?php echo $i ?></a>
                         <?php
                         }
                         ?>
@@ -114,16 +114,16 @@ $total = $_GET['total'];
                         ?>
                                 <a class="cursor-pointer">Next</a>
                             <?php } else { ?>
-                                <a href="?page=2">Next</a>
+                                <a href="?page=2&commandId=<?php echo $commandId ?>&cartId=<?php echo $cartId ?>&total=<?php echo $total ?>">Next</a>
                             <?php } ?>
 
                         <?php } elseif ($_GET['page'] >= $pages) { ?>
                             <a class="cursor-pointer">Next</a>
                         <?php } else { ?>
-                            <a href="?page=<?php echo $_GET['page'] + 1 ?>">Next</a>
+                            <a href="?page=<?php echo $_GET['page'] + 1 ?>&commandId=<?php echo $commandId ?>&cartId=<?php echo $cartId ?>&total=<?php echo $total ?>">Next</a>
                         <?php }
                         ?>
-                        <a href="?page=<?php echo $pages ?>">Last</a>
+                        <a href="?page=<?php echo $pages ?>&commandId=<?php echo $commandId ?>&cartId=<?php echo $cartId ?>&total=<?php echo $total ?>">Last</a>
                     </div>
                 </div>
             </div>

@@ -27,7 +27,7 @@ if (isset($_SESSION['administrator_name'])) {
         <div class="flex flex-col p-5 w-64 bg-[#bdff72]">
             <div class="block mb-5 w-1/3 sm:w-1/4 md:w-1/12">
                 <a href="../../index.php">
-                    <p class="text-black text-3xl">LOGO</p>
+                    <p class="text-black text-3xl">OPEP</p>
                 </a>
             </div>
             <p class="text-xl font-bold">Navigation</p>

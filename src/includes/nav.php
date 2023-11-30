@@ -34,7 +34,7 @@
  <nav class="bg-[#bdff72] h-12 flex justify-between items-center px-2 md:px-4">
      <div class="block w-1/3 sm:w-1/4 md:w-1/12">
          <a href="../../index.php">
-             <p class="text-black text-3xl">LOGO</p>
+             <p class="text-black text-3xl">OPEP</p>
          </a>
      </div>
      <ul class="font-poppins text-black text-sm list-none [&>*]:inline-block [&>*]:mr-3 hidden md:block">
@@ -99,10 +99,14 @@
                              </div>
                          <?php endif ?>
                      <?php endif ?>
-                     <p id="basket-count" class="bg-amber-400 rounded-3xl w-5 h-5 text-center absolute top-2 right-[55px] sm:block sm:right-[55px] md:right-[17px] md:block">
-                         <?php echo $count ?>
-                     </p>
-                     <img onclick="openPopup()" class="open-btn dropbtn color-black cursor-pointer w-9  h-9 object-contain sm:block sm:mr-1  " src="../images/cart.png" alt="" />
+                     <?php if (!isset($_SESSION['client_name'])) { ?>
+                         <!-- <img onclick="window.location.href='src/pages/login.php'" class="open-btn dropbtn color-black cursor-pointer w-9  h-9 object-contain sm:block sm:mr-1  " src="src/images/cart.png" alt="" /> -->
+                     <?php } else { ?>
+                         <p id="basket-count" class="bg-amber-400 rounded-3xl w-5 h-5 text-center absolute top-2 right-[55px] sm:block sm:right-[55px] md:right-[17px] md:block">
+                             <?php echo $count ?>
+                         </p>
+                         <img onclick="openPopup()" class="open-btn dropbtn color-black cursor-pointer w-9  h-9 object-contain sm:block sm:mr-1  " src="../images/cart.png" alt="" />
+                     <?php } ?>
                  </div>
              </div>
              <div id="burgermenu" onclick="toggleBurgerMenu()" class="md:hidden md:mx-2 cursor-pointer mr-3 ml-3">
@@ -169,7 +173,7 @@
                 ?>
 
          </div>
-         <div class="fixed w-[30%] h-14 bottom-0 p-1">
+         <div class="fixed w-[30%] h-14 bottom-0 p-1 bg-white">
              <div class="flex justify-evenly">
                  <?php if ($count > 0) { ?>
                      <a class="border border-black bg-[#19911D] font-semibold p-1 hover:bg-[#5edb64] rounded-md" href="../pages/checkout.php">Checkout</a>

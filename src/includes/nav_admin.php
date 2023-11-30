@@ -2,7 +2,7 @@
     <nav class="bg-[#bdff72] h-12 flex justify-between items-center px-2 md:px-4">
         <div class="block w-1/3 sm:w-1/4 md:w-1/12">
             <a href="../../index.php">
-                <p class="text-black text-3xl">LOGO</p>
+                <p class="text-black text-3xl">OPEP</p>
             </a>
         </div>
         
