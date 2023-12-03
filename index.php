@@ -244,7 +244,7 @@ session_start();
                     ?>
                         <p class="text-center text-lg font-medium mb-3">Your Items</p>
                         <?php
-                        while ($row = mysqli_fetch_assoc($result)) {
+                        while ($row = mysqli_fetch_assoc($result)) {    
                             $plantId = $row['plantId'];
                             $plantName = $row['plantName'];
                             $plantImage = $row['plantImage'];
@@ -354,7 +354,7 @@ session_start();
         </div>
     </div>
 
-    <main class="h-[54vh] bg-[url('/OPEP/src/images/hero.webp')] bg-cover bg-no-repeat">
+    <main class="h-[53.9vh] bg-[url('/OPEP/src/images/hero.webp')] bg-cover bg-no-repeat">
         <div class="flex flex-col items-start justify-center h-full w-[40%] ml-[10%] gap-4">
             <h1 class="text-[42px] text-white font-medium stroke-1 stroke-black">Your online shop for houseplants and more!</h1>
             <a href="src/pages/catalog.php" class="text-md font-medium p-2 w-42 bg-amber-300 border-2 border-amber-400 rounded-2xl">Shop all plants</a>*
